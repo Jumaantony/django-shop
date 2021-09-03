@@ -3,9 +3,13 @@
 
 {% block title %}
 
-    {% if category %} {{ category.name }}
+    {% if category %}
 
-    {% else %} Products
+        {{ category.name }}
+
+    {% else %}
+
+        Products
 
     {% endif %}
 
