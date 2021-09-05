@@ -28,7 +28,7 @@ urlpatterns = [
     path('', include('shop.urls', namespace='shop')),
 
     # order url
-    path('orders/', include('orders.urls', namespace='orders')),
+    path('orders/', include('orders.urls', namespace='order')),
 
 ]
 if settings.DEBUG: urlpatterns += static(settings.MEDIA_URL,
