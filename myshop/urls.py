@@ -24,12 +24,14 @@ urlpatterns = [
     # cart urls
     path('cart/', include('cart.urls', namespace='cart')),
 
-    # shop url
-    path('', include('shop.urls', namespace='shop')),
+    # payment urls
+    path('payment/', include('payment.urls', namespace='payment')),
 
     # order url
     path('orders/', include('orders.urls', namespace='order')),
 
+    # shop url
+    path('', include('shop.urls', namespace='shop')),
 ]
 if settings.DEBUG: urlpatterns += static(settings.MEDIA_URL,
                                          document_root=settings.MEDIA_ROOT)
