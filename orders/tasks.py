@@ -1,12 +1,8 @@
 from celery import Celery
 from django.core.mail import send_mail
 from .models import Order
-import os
 
-BROKER_URL = os.environ['REDIS_URL']
-CELERY_RESULT_BACKEND = os.environ['REDIS_URL']
-
-app = Celery('tasks')
+app = Celery('tasks', broker='amqp://guest:**@127.0.0.1:5672//:')
 
 
 @app.task
