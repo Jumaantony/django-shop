@@ -2,7 +2,7 @@ from celery import Celery
 from django.core.mail import send_mail
 from .models import Order
 
-app = Celery('tasks', broker='amqp://guest:guest@localhost:5672/')
+app = Celery('tasks')
 
 
 @app.task
