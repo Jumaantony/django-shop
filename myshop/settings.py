@@ -17,10 +17,15 @@ import django_heroku
 import dj_database_url
 
 # cloudinary imports
-
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+
+import dotenv
+
+dotenv_file = os.path.join(".env")
+if os.path.isfile(dotenv_file):
+    dotenv.load_dotenv(dotenv_file)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,7 +34,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4rf0xc#+1=+v2_)h1m+j0=ayo)yyr(#1b)hp8ou9i)=@^b#mso'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,9 +42,9 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Braintree settings
-BRAINTREE_MERCHANT_ID = 'vk22nv886356wwgh'  # Merchant ID
-BRAINTREE_PUBLIC_KEY = 'nqz95bfyhqqyqphc'  # Public Key
-BRAINTREE_PRIVATE_KEY = '64bebee3c0be5e3afc3e6eb54667e69c'  # Private key
+BRAINTREE_MERCHANT_ID = os.environ['BRAINTREE_MERCHANT_ID']  # Merchant ID
+BRAINTREE_PUBLIC_KEY = os.environ['BRAINTREE_PUBLIC_KEY']  # Public Key
+BRAINTREE_PRIVATE_KEY = os.environ['BRAINTREE_PRIVATE_KEY']  # Private key
 
 BRAINTREE_CONF = braintree.Configuration(
     braintree.Environment.Sandbox,
@@ -50,9 +55,9 @@ BRAINTREE_CONF = braintree.Configuration(
 
 # cloudinary config
 cloudinary.config(
-    cloud_name="kisumu-org",
-    api_key="773424846215666",
-    api_secret="SaMBazwZvkBe9vubaIMFgjzdR7M",
+    cloud_name=os.environ['cloud_name'],
+    api_key=os.environ['api_key'],
+    api_secret=os.environ['api_secret'],
 )
 
 # Application definition
@@ -116,9 +121,15 @@ CACHES = {
         "LOCATION": os.environ.get('REDIS_URL'),
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "CONNECTION_POOL_KWARGS": {
+                "ssl_cert_reqs": None
+            },
         }
     }
 }
+
+REDIS_URL = 'redis://'
+
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -174,7 +185,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
 EMAIL_HOST_USER = 'odongoanton2@gmail.com'
-EMAIL_HOST_PASSWORD = 'kladvfhztnkiagtv'
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
 EMAIL_USE_TLS = True
 
 # Default primary key field type

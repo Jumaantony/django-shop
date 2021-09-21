@@ -2,7 +2,14 @@ from celery import Celery
 from django.core.mail import send_mail
 from .models import Order
 
-app = Celery('tasks', broker='amqp://guest:**@127.0.0.1:5672//:')
+# connect to redis
+
+app = Celery('tasks', broker='amqp://pd3cfd77a31e74f3a8271be9add8fb55ee70ba9e229f9033f779c1980fc5dc71b:**@ec2-44-195'
+                             '-137-100.compute-1.amazonaws.com\:7000//:')
+
+
+# redis://:pd3cfd77a31e74f3a8271be9add8fb55ee70ba9e229f9033f779c1980fc5dc71b:**@ec2-44-195-137-100.compute-1.amazonaws
+# .com\:7000//:
 
 
 @app.task
