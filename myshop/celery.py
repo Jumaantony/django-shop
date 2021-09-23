@@ -12,6 +12,9 @@ app = Celery('myshop')
 #   should have a `CELERY_` prefix.
 app.config_from_object('django.conf.settings', namespace='CELERY')
 
+# using redis as the result backend
+app.conf.result_backend = 'redis://127.0.0.1:6379/0'
+
 # Load task modules from all registered Django apps.
 app.autodiscover_tasks()
 
