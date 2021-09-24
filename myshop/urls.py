@@ -30,6 +30,9 @@ urlpatterns = [
     # order url
     path('orders/', include('orders.urls', namespace='order')),
 
+    # coupons url
+    path('coupons/', include('coupons.urls', namespace='coupons')),
+
     # shop url
     path('', include('shop.urls', namespace='shop')),
 ]
